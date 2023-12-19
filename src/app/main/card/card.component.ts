@@ -8,7 +8,7 @@ import { Component, Input, NgModule } from '@angular/core';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  @Input() card!: string;
+  @Input() card: string = '';
 
   cardUrl = 'assets/cards/{{card}}.png';
 }

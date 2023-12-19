@@ -3,12 +3,13 @@
 
 <p>{{ availableCards.length }} Total Cards in Shoe</p>
 
-<button (click)="dealCards()">Deal Cards</button>
-<div class="card-container" *ngIf="userCards.length > 0">
-  <p>My Cards</p>
-  <app-card *ngFor="let card of userCards" [card]="card"></app-card>
-</div>
+<button *ngIf="userScore == 0" (click)="dealCards()">Deal Cards</button>
 <div class="card-container" *ngIf="dealerCards.length > 0">
-  <p>dealerCards</p>
+  <p>Dealer Cards</p>
   <app-card *ngFor="let card of dealerCards" [card]="card"></app-card>
+  <app-card card="red_back"></app-card>
+</div>
+<div class="card-container" *ngIf="userCards.length > 0">
+  <p>Player Cards</p>
+  <app-card *ngFor="let card of userCards" [card]="card"></app-card>
 </div>

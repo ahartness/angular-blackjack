@@ -86,8 +86,15 @@ export class CardDataService {
     return card;
   }
 
-  getCardScore(cardId: string, playerId: string) {
-    let score = 0;
-    let cardValue = 0;
+  getCardScore(cardId: string) {
+    const card = cardId.slice(0, -1);
+    console.log('player card', this.userCards);
+    if (card === 'A') {
+      return 11;
+    } else if (card === 'J' || card === 'Q' || card === 'K') {
+      return 10;
+    } else {
+      return parseInt(card);
+    }
   }
 }

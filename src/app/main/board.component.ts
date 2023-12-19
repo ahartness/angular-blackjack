@@ -14,6 +14,8 @@ export class BoardComponent {
   randomCard!: string;
   userCards: string[] = [];
   dealerCards: string[] = [];
+  userScore = this.cardDataService.userScore;
+  dealerScore = this.cardDataService.dealerScore;
   availableCards = this.cardDataService.availableCards;
 
   constructor(private cardDataService: CardDataService) {}
@@ -26,6 +28,7 @@ export class BoardComponent {
       this.userCards.push(this.cardDataService.getRandomCard('user'));
       this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
       this.userCards.push(this.cardDataService.getRandomCard('user'));
+      console.log(this.cardDataService.getCardScore(this.userCards[0]));
     } else {
       this.cardDataService.reset();
       this.availableCards = this.cardDataService.availableCards;
