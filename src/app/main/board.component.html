@@ -1,0 +1,12 @@
+<button (click)="showRandomCard()">Show Random Card</button>
+<app-card [card]="randomCard"></app-card>
+
+<button (click)="dealCards()">Deal Cards</button>
+<div class="card-container" *ngIf="userCards.length > 0">
+  <p>My Cards</p>
+  <app-card *ngFor="let card of userCards" [card]="card"></app-card>
+</div>
+<div class="card-container" *ngIf="dealerCards.length > 0">
+  <p>dealerCards</p>
+  <app-card *ngFor="let card of dealerCards" [card]="card"></app-card>
+</div>
