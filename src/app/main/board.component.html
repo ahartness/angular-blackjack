@@ -1,6 +1,8 @@
 <button (click)="showRandomCard()">Show Random Card</button>
 <app-card [card]="randomCard"></app-card>
 
+<p>{{ availableCards.length }} Total Cards in Show</p>
+
 <button (click)="dealCards()">Deal Cards</button>
 <div class="card-container" *ngIf="userCards.length > 0">
   <p>My Cards</p>

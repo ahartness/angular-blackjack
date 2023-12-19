@@ -14,13 +14,23 @@ export class BoardComponent {
   randomCard!: string;
   userCards: string[] = [];
   dealerCards: string[] = [];
+  availableCards = this.cardDataService.availableCards;
 
   constructor(private cardDataService: CardDataService) {}
 
   dealCards() {
-    this.userCards.push(this.cardDataService.getRandomCard('user'));
-    this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
-    this.userCards.push(this.cardDataService.getRandomCard('user'));
+    this.userCards = [];
+    this.dealerCards = [];
+    console.log(this.cardDataService.availableCards.length);
+    if (this.cardDataService.availableCards.length > 10) {
+      this.userCards.push(this.cardDataService.getRandomCard('user'));
+      this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
+      this.userCards.push(this.cardDataService.getRandomCard('user'));
+    } else {
+      this.cardDataService.reset();
+      this.availableCards = this.cardDataService.availableCards;
+      this.dealCards();
+    }
   }
 
   showRandomCard() {
