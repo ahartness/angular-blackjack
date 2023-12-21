@@ -4,12 +4,12 @@
 <p>{{ availableCards.length }} Total Cards in Shoe</p>
 
 <button *ngIf="userScore == 0" (click)="dealCards()">Deal Cards</button>
+<p>Dealer Cards</p>
 <div class="card-container" *ngIf="dealerCards.length > 0">
-  <p>Dealer Cards</p>
   <app-card *ngFor="let card of dealerCards" [card]="card"></app-card>
   <app-card card="red_back"></app-card>
 </div>
+<p>Player Cards</p>
 <div class="card-container" *ngIf="userCards.length > 0">
-  <p>Player Cards</p>
   <app-card *ngFor="let card of userCards" [card]="card"></app-card>
 </div>
