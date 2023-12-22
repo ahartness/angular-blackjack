@@ -67,6 +67,7 @@ export class CardDataService {
     this.userScore = 0;
     this.dealerScore = 0;
     this.availableCards = [...this.allCards];
+    this.gameActive = false;
   }
 
   constructor() {
@@ -86,15 +87,20 @@ export class CardDataService {
     return card;
   }
 
-  getCardScore(cardId: string) {
-    const card = cardId.slice(0, -1);
+  getCardScore(cards: string[]): any {
+    if (cards.length === 0) return 0;
+    const firstCard = this.userCards.pop();
+    const card = firstCard?.slice(0, 1);
+    console.log('holder', firstCard, card);
     console.log('player card', this.userCards);
     if (card === 'A') {
-      return 11;
+      return 11 + this.getCardScore(this.userCards);
     } else if (card === 'J' || card === 'Q' || card === 'K') {
-      return 10;
+      return 10 + this.getCardScore(this.userCards);
     } else {
-      return parseInt(card);
+      return (
+        parseInt(card?.toString() || '') + this.getCardScore(this.userCards)
+      );
     }
   }
 }
