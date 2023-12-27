@@ -50,20 +50,17 @@ export class BoardComponent {
   }
 
   stand() {
-    this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
+    while(this.cardDataService.dealerScore < 17) this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
     if(this.cardDataService.dealerScore > 21 || this.cardDataService.dealerScore < this.cardDataService.userScore){
       this.winnerText = 'You Win!';
-      this.gameActive = false;
-      this.availableCards = this.cardDataService.availableCards;
     } else if (this.cardDataService.dealerScore > this.cardDataService.userScore) {
       this.winnerText = 'Dealer Wins!';
-      this.gameActive = false;
-      this.availableCards = this.cardDataService.availableCards;
     } else if (this.cardDataService.dealerScore === this.cardDataService.userScore) {
       this.winnerText = 'Push!';
-      this.gameActive = false;
-      this.availableCards = this.cardDataService.availableCards;
+      
     }
+    this.gameActive = false;
+    this.availableCards = this.cardDataService.availableCards;
   }
 
   reset() {

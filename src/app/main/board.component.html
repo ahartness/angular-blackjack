@@ -1,19 +1,26 @@
 <p>{{ availableCards.length }} Total Cards in Shoe</p>
 
+<div class="" *ngIf="userCards.length > 0">
+  <button (click)="hit()" [disabled]="this.cardDataService.userScore > 21">
+    Hit
+  </button>
+  <button (click)="stand()" [disabled]="this.cardDataService.userScore > 21">
+    Stand
+  </button>
+  <button (click)="reset()">Reset</button>
+</div>
+
 <p *ngIf="this.winnerText !== ''">{{ this.winnerText }}</p>
 
 <button *ngIf="gameActive == false" (click)="dealCards()">Deal Cards</button>
-<p>Dealer Cards {{ this.cardDataService.dealerScore }}</p>
+<p class="text-container">
+  Dealer Score: {{ this.cardDataService.dealerScore }}
+</p>
 <div class="card-container" *ngIf="dealerCards.length > 0">
   <app-card *ngFor="let card of dealerCards" [card]="card"></app-card>
-  <app-card *ngIf="dealerCards.length < 2"  card="red_back"></app-card>
+  <app-card *ngIf="dealerCards.length < 2" card="red_back"></app-card>
 </div>
-<p>Player Cards: {{ this.cardDataService.userScore }}</p>
+<p class="text-container">Player Score: {{ this.cardDataService.userScore }}</p>
 <div class="card-container" *ngIf="userCards.length > 0">
   <app-card *ngFor="let card of userCards" [card]="card"></app-card>
-</div>
-<div class="card-container" *ngIf="userCards.length > 0">
-  <button (click)="hit()" [disabled]="this.cardDataService.userScore > 21">Hit</button>
-  <button (click)="stand()" [disabled]="this.cardDataService.userScore > 21">Stand</button>
-  <button (click)="reset()">Reset</button>
 </div>
