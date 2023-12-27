@@ -31,8 +31,6 @@ export class BoardComponent {
       this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
       this.userCards.push(this.cardDataService.getRandomCard('user'));
 
-      this.userScore = this.cardDataService.getCardScore(this.userCards);
-      this.dealerScore = this.cardDataService.getCardScore(this.dealerCards);
     } else {
       this.cardDataService.reset();
       this.gameActive = false;
@@ -44,7 +42,6 @@ export class BoardComponent {
   hit() {
     this.userCards.push(this.cardDataService.getRandomCard('user'));
     console.log('on hit', this.userCards);
-    this.userScore += this.cardDataService.getCardScore(this.userCards);
     if (this.userScore > 21) {
       this.cardDataService.reset();
       this.gameActive = false;
@@ -53,8 +50,4 @@ export class BoardComponent {
   }
 
   stand() {}
-
-  showRandomCard() {
-    this.randomCard = this.cardDataService.getRandomCard('user');
-  }
 }
