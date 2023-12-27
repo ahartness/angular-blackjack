@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "gh-build": "ng build --base-href /angular-blackjack/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-blackjack": "node dist/angular-blackjack/server/server.mjs"
