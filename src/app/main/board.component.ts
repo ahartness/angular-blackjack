@@ -19,7 +19,7 @@ export class BoardComponent {
   availableCards = this.cardDataService.availableCards;
   gameActive = this.cardDataService.gameActive;
 
-  constructor(private cardDataService: CardDataService) {}
+  constructor(public cardDataService: CardDataService) {}
 
   dealCards() {
     this.userCards = [];
@@ -42,12 +42,23 @@ export class BoardComponent {
   hit() {
     this.userCards.push(this.cardDataService.getRandomCard('user'));
     console.log('on hit', this.userCards);
-    if (this.userScore > 21) {
+    if (this.cardDataService.userScore > 21) {
       this.cardDataService.reset();
       this.gameActive = false;
       this.availableCards = this.cardDataService.availableCards;
     }
   }
 
-  stand() {}
+  stand() {
+    this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
+    if(this.cardDataService.dealerScore > 21){
+      this.cardDataService.reset();
+      this.gameActive = false;
+      this.availableCards = this.cardDataService.availableCards;
+    } else if (this.cardDataService.dealerScore > this.cardDataService.userScore) {
+      this.cardDataService.reset();
+      this.gameActive = false;
+      this.availableCards = this.cardDataService.availableCards;
+    }
+  }
 }

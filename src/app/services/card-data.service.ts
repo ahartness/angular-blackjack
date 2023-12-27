@@ -78,7 +78,7 @@ export class CardDataService {
     const randomIndex = Math.floor(Math.random() * this.availableCards.length);
     const card = this.availableCards[randomIndex];
     this.availableCards.splice(randomIndex, 1);
-    let cardValue:number = this.getCardValue(card, playerId);
+    let cardValue: number = this.getCardValue(card, playerId);
     console.log(this.availableCards.length + ' cards left');
     if (playerId === 'user') {
       this.userCards.push(card);
@@ -90,12 +90,12 @@ export class CardDataService {
     return card;
   }
 
-  getCardValue(card: string, playerId:string): number {
+  getCardValue(card: string, playerId: string): number {
     let score = 0;
-    score = (playerId === 'user') ? this.userScore : this.dealerScore;
-    let playerCard = card.slice(0, 1);
-    if (playerCard === 'A'){
-      if (score + 11 > 21){
+    score = playerId === 'user' ? this.userScore : this.dealerScore;
+    let playerCard = card.length === 3 ? card.slice(0, 2) : card.slice(0, 1);
+    if (playerCard === 'A') {
+      if (score + 11 > 21) {
         return 1;
       } else {
         return 11;
