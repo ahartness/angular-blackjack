@@ -1,6 +1,6 @@
 <p>{{ availableCards.length }} Total Cards in Shoe</p>
 
-<p *ngIf="userScore > 21">Dealer Wins!</p>
+<p *ngIf="this.winnerText !== ''">{{ this.winnerText }}</p>
 
 <button *ngIf="gameActive == false" (click)="dealCards()">Deal Cards</button>
 <p>Dealer Cards {{ this.cardDataService.dealerScore }}</p>
@@ -13,6 +13,7 @@
   <app-card *ngFor="let card of userCards" [card]="card"></app-card>
 </div>
 <div class="card-container" *ngIf="userCards.length > 0">
-  <button (click)="hit()" [disabled]="userScore > 21">Hit</button>
-  <button (click)="stand()" [disabled]="userScore > 21">Stand</button>
+  <button (click)="hit()" [disabled]="this.cardDataService.userScore > 21">Hit</button>
+  <button (click)="stand()" [disabled]="this.cardDataService.userScore > 21">Stand</button>
+  <button (click)="reset()">Reset</button>
 </div>

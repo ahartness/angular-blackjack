@@ -66,8 +66,16 @@ export class CardDataService {
     this.dealerCards = [];
     this.userScore = 0;
     this.dealerScore = 0;
-    this.availableCards = [];
+    this.availableCards = [...this.allCards];
     this.gameActive = false;
+  }
+
+  newHand() {
+    this.userCards = [];
+    this.dealerCards = [];
+    this.userScore = 0;
+    this.dealerScore = 0;
+    this.gameActive = true;
   }
 
   constructor() {
@@ -84,8 +92,15 @@ export class CardDataService {
       this.userCards.push(card);
       this.userScore += cardValue;
     } else {
-      this.dealerCards.push(card);
-      this.dealerScore += cardValue;
+      if (this.dealerCards.length === 0) {
+        this.dealerCards.push(card);
+        this.dealerScore += cardValue;
+      } else {
+        while(this.dealerScore < 17){ 
+          this.dealerCards.push(card);
+          this.dealerScore += cardValue;
+        }
+      }
     }
     return card;
   }

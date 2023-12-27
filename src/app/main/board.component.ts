@@ -14,23 +14,23 @@ export class BoardComponent {
   randomCard!: string;
   userCards: string[] = [];
   dealerCards: string[] = [];
-  userScore = this.cardDataService.userScore;
-  dealerScore = this.cardDataService.dealerScore;
+  winnerText = '';
   availableCards = this.cardDataService.availableCards;
   gameActive = this.cardDataService.gameActive;
 
   constructor(public cardDataService: CardDataService) {}
 
   dealCards() {
+    this.winnerText = '';
     this.userCards = [];
     this.dealerCards = [];
     console.log(this.cardDataService.availableCards.length);
     this.gameActive = true;
     if (this.cardDataService.availableCards.length > 10) {
+      this.cardDataService.newHand();
       this.userCards.push(this.cardDataService.getRandomCard('user'));
       this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
       this.userCards.push(this.cardDataService.getRandomCard('user'));
-
     } else {
       this.cardDataService.reset();
       this.gameActive = false;
@@ -43,7 +43,7 @@ export class BoardComponent {
     this.userCards.push(this.cardDataService.getRandomCard('user'));
     console.log('on hit', this.userCards);
     if (this.cardDataService.userScore > 21) {
-      this.cardDataService.reset();
+      this.winnerText = 'Dealer Wins!';
       this.gameActive = false;
       this.availableCards = this.cardDataService.availableCards;
     }
@@ -51,14 +51,27 @@ export class BoardComponent {
 
   stand() {
     this.dealerCards.push(this.cardDataService.getRandomCard('dealer'));
-    if(this.cardDataService.dealerScore > 21){
-      this.cardDataService.reset();
+    if(this.cardDataService.dealerScore > 21 || this.cardDataService.dealerScore < this.cardDataService.userScore){
+      this.winnerText = 'You Win!';
       this.gameActive = false;
       this.availableCards = this.cardDataService.availableCards;
     } else if (this.cardDataService.dealerScore > this.cardDataService.userScore) {
-      this.cardDataService.reset();
+      this.winnerText = 'Dealer Wins!';
+      this.gameActive = false;
+      this.availableCards = this.cardDataService.availableCards;
+    } else if (this.cardDataService.dealerScore === this.cardDataService.userScore) {
+      this.winnerText = 'Push!';
       this.gameActive = false;
       this.availableCards = this.cardDataService.availableCards;
     }
+  }
+
+  reset() {
+    this.winnerText = '';
+    this.cardDataService.reset();
+    this.userCards = [];
+    this.dealerCards = [];
+    this.gameActive = false;
+    this.availableCards = this.cardDataService.availableCards;
   }
 }
