@@ -92,16 +92,10 @@ export class CardDataService {
       this.userCards.push(card);
       this.userScore += cardValue;
     } else {
-      if (this.dealerCards.length === 0) {
-        this.dealerCards.push(card);
-        this.dealerScore += cardValue;
-      } else {
-        while(this.dealerScore < 17){ 
-          this.dealerCards.push(card);
-          this.dealerScore += cardValue;
-        }
-      }
+      this.dealerCards.push(card);
+      this.dealerScore += cardValue;
     }
+
     return card;
   }
 
